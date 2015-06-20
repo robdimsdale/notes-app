@@ -1,0 +1,11 @@
+---
+platform: linux
+
+image: docker:///robdimsdale/blog
+
+inputs:
+- name: app-master
+- name: notes
+
+run:
+  path: app-master/scripts/ci/build_deploy_site

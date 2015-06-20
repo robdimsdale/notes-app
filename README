@@ -1,0 +1,21 @@
+Papers Notes
+============
+
+Notes on various papers in markdown format.
+
+
+## Prerequisites
+
+* install bundler `gem install bundler`
+* run `bundle install`
+
+## Usage
+
+* To live refresh the site when developing, `middleman`
+  * This will just sit in Terminal and watch for changes to be made
+  * To exit, `ctrl + c`
+  * This is good when making live changes
+  * Visit http://localhost:4567
+    * This page is only visible when middleman is running
+* To generate the site, `middleman build`
+  * TODO: this should be done by CI

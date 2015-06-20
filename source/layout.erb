@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title><%= current_article.title + ' - ' unless current_article.nil? %>Notes</title>
+  <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link href='//fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+
+  <%= stylesheet_link_tag "application.css" %>
+  <%= stylesheet_link_tag "highlighting" %>
+
+</head>
+  <body>
+    <div id="wrap">
+      <div id="header">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <h2><a href="/">Notes</a></h2>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/tags">Tags</a></li>
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+          </div>
+        </nav>
+      </div>
+      <div class="container page">
+
+        <div id="main" role="main">
+          <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+              <%= "<h1>#{current_article.title}</h1>" unless current_article.nil? %>
+
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <hr/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-6">
+            <p class="text-muted">&copy; 2014-2015 Rob Dimsdale</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

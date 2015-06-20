@@ -1,0 +1,59 @@
+---
+resources:
+- name: app-develop
+  type: git
+  source:
+    uri: git@github.com:robdimsdale/notes-app
+    branch: develop
+    private_key: {{app-private-key}}
+
+- name: app-master
+  type: git
+  source:
+    uri: git@github.com:robdimsdale/notes-app
+    branch: master
+    private_key: {{app-private-key}}
+
+- name: notes
+  type: git
+  source:
+    uri: {{notes-git-uri}}
+    branch: {{notes-git-branch}}
+    private_key: {{notes-private-key}}
+
+jobs:
+- name: build-deploy-site-develop
+  plan:
+  - aggregate:
+    - get: notes
+      trigger: true
+    - get: app-develop
+      trigger: true
+  - task: build-deploy-site-develop
+    file: app-develop/scripts/ci/build_deploy_site_develop.yml
+    config:
+      params:
+        CF_USER: {{cf-user}}
+        CF_PASSWORD: {{cf-password}}
+        CF_ORG: {{cf-org-develop}}
+        CF_SPACE: {{cf-space-develop}}
+        CF_APPLICATION: {{cf-application-develop}}
+        STATIC_FILE_AUTH: {{static-file-auth-develop}}
+
+- name: build-deploy-site-master
+  plan:
+  - aggregate:
+    - get: notes
+      trigger: true
+    - get: app-master
+      trigger: true
+  - task: build-deploy-site-master
+    file: app-master/scripts/ci/build_deploy_site_master.yml
+    config:
+      params:
+        CF_USER: {{cf-user}}
+        CF_PASSWORD: {{cf-password}}
+        CF_ORG: {{cf-org-master}}
+        CF_SPACE: {{cf-space-master}}
+        CF_APPLICATION: {{cf-application-master}}
+        STATIC_FILE_AUTH: {{static-file-auth-master}}
