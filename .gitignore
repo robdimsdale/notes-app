@@ -19,3 +19,5 @@
 
 # Ignore posts content
 /source/posts
+
+Staticfile.auth
