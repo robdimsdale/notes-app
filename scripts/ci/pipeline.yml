@@ -23,6 +23,7 @@ resources:
 
 jobs:
 - name: build-deploy-site-develop
+  serial: true
   plan:
   - aggregate:
     - get: notes
@@ -41,6 +42,7 @@ jobs:
         STATIC_FILE_AUTH: {{static-file-auth-develop}}
 
 - name: build-deploy-site-master
+  serial: true
   plan:
   - aggregate:
     - get: notes
