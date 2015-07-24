@@ -1,4 +1,9 @@
 ---
+slack-config: &slack-config
+  username: concourse
+  icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+  channel: {{slack-channel}}
+
 resources:
 - name: app-develop
   type: git
@@ -21,6 +26,11 @@ resources:
     branch: {{notes-git-branch}}
     private_key: {{notes-private-key}}
 
+- name: slack_alert
+  type: slack-notification
+  source:
+    url: {{slack-url}}
+
 jobs:
 - name: build-deploy-site-develop
   serial: true
@@ -40,6 +50,16 @@ jobs:
         CF_SPACE: {{cf-space-develop}}
         CF_APPLICATION: {{cf-application-develop}}
         STATIC_FILE_AUTH: {{static-file-auth-develop}}
+    on_success:
+      put: slack_alert
+      params:
+        <<: *slack-config
+        text: {{slack-develop-success-text}}
+    on_failure:
+      put: slack_alert
+      params:
+        <<: *slack-config
+        text: {{slack-develop-failure-text}}
 
 - name: build-deploy-site-master
   serial: true
@@ -59,3 +79,13 @@ jobs:
         CF_SPACE: {{cf-space-master}}
         CF_APPLICATION: {{cf-application-master}}
         STATIC_FILE_AUTH: {{static-file-auth-master}}
+    on_success:
+      put: slack_alert
+      params:
+        <<: *slack-config
+        text: {{slack-master-success-text}}
+    on_failure:
+      put: slack_alert
+      params:
+        <<: *slack-config
+        text: {{slack-master-failure-text}}
