@@ -28,6 +28,7 @@ resources:
 
 jobs:
 - name: build-deploy-site-develop
+  public: false
   serial: true
   plan:
   - aggregate:
@@ -61,6 +62,7 @@ jobs:
         text: {{slack-develop-failure-text}}
 
 - name: build-deploy-site-master
+  public: false
   serial: true
   plan:
   - aggregate:
