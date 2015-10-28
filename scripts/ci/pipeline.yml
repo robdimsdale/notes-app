@@ -38,7 +38,7 @@ jobs:
       resource: app-develop
       trigger: true
   - task: build-deploy-site-develop
-    file: app/scripts/ci/build_deploy_site_develop.yml
+    file: app/scripts/ci/build_deploy_site.yml
     config:
       params:
         CF_USER: {{cf-user}}
@@ -73,7 +73,7 @@ jobs:
       resource: app-master
       trigger: true
   - task: build-deploy-site-master
-    file: app/scripts/ci/build_deploy_site_master.yml
+    file: app/scripts/ci/build_deploy_site.yml
     config:
       params:
         CF_USER: {{cf-user}}
