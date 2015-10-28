@@ -4,8 +4,8 @@ platform: linux
 image: docker:///robdimsdale/middleman-site-docker-image
 
 inputs:
-- name: app-master
+- name: app
 - name: notes
 
 run:
-  path: app-master/scripts/ci/build_deploy_site
+  path: app/scripts/ci/build_deploy_site

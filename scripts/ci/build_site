@@ -2,18 +2,18 @@
 
 set -eux
 
-MY_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # This script assumes that it lives two directories below the base directory.
-BASE_DIR="$( cd $MY_DIR/../.. && pwd )"
+base_dir="$( cd "${my_dir}/../.." && pwd )"
 
 # And that a directory called 'notes' is a peer of the base directory.
-NOTES_DIR="$( cd $BASE_DIR/../notes && pwd )"
+notes_dir="$( cd "${base_dir}/../notes" && pwd )"
 
-mkdir -p "${BASE_DIR}/source/posts"
-cp -r "${NOTES_DIR}"/* "${BASE_DIR}/source/posts"
+mkdir -p "${base_dir}/source/posts"
+cp -r "${notes_dir}"/* "${base_dir}/source/posts"
 
-pushd ${BASE_DIR}
+pushd "${base_dir}"
   bundle
   bundle exec middleman build --clean
 popd
