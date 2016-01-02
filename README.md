@@ -30,4 +30,4 @@ bundle install
 The Ci system used is [concourse](http://concourse.ci). The symbolic-link approach above works well for viewing the notes, but is incompatible with running `fly` locally.
 
 ## License and Copyright
-Copyright © 2015, Robert Dimsdale. Licensed under [MIT License](https://github.com/robdimsdale/notes-app/raw/master/LICENSE).
+Copyright © 2015-2016, Robert Dimsdale. Licensed under [MIT License](https://github.com/robdimsdale/notes-app/raw/master/LICENSE).
